@@ -37,3 +37,50 @@ public class Main {
 		 in.close();
        
 	}	
+
+
+
+
+方法二
+import java.util.Scanner;  
+import java.util.HashMap; 
+import java.util.ArrayList;  
+public class Main {
+	private ArrayList<String> city=new ArrayList<String>();
+	private HashMap<String,HashMap<String,Integer>> distance=new HashMap<String,HashMap<String,Integer>>();
+	private static Scanner in =new Scanner(System.in);	
+	public void input()
+	{
+		String temp;
+		while (true)  
+        {  
+            temp = in.next();  
+            if (temp.equals("###"))  
+                break;  
+            city.add(temp);  
+        }  
+		for(int i=0;i<city.size();i++)
+		{
+			HashMap<String,Integer> temphash=new HashMap<String,Integer>();
+			for(int j=0;j<city.size();j++)
+			{
+				int dis=in.nextInt();
+				temphash.put(city.get(j), dis);
+			}
+			distance.put(city.get(i),temphash);
+		}
+	}
+	public int search(String start,String end)
+	{
+		return distance.get(start).get(end);
+	}
+	
+	public static void main(String[] args)
+	{
+		Main m=new Main();
+		m.input();
+		String start = in.next();  
+        String end = in.next();  
+        System.out.println(m.search(start, end)); 
+	}	
+}
